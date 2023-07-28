@@ -4,18 +4,6 @@
 
 BasicMavlinkEncoder::BasicMavlinkEncoder() = default;
 
-std::size_t
-BasicMavlinkEncoder::encodeAttitude(mavlink_message_t &msg, uint8_t *buffer, uint32_t time_boot_ms, float roll,
-                                    float pitch, float yaw, float rollSpeed, float pitchSpeed, float yawSpeed) {
-    return ENCODE_MESSAGE(attitude, time_boot_ms, roll, pitch, yaw, rollSpeed, pitchSpeed, yawSpeed)(msg, buffer);
-}
-
-std::size_t BasicMavlinkEncoder::encodeGlobalPositionInt(mavlink_message_t &msg, uint8_t *buffer, uint32_t time_boot_ms,
-                                                         int32_t lat, int32_t lon, int32_t alt, int32_t relativeAlt,
-                                                         int16_t vx, int16_t vy, int16_t vz, uint16_t hdg) {
-    return ENCODE_MESSAGE(global_position_int, time_boot_ms, lat, lon, alt, relativeAlt, vx, vy, vz, hdg)(msg, buffer);
-}
-
 /**
  * Add the contents of a buffer to the end of a vector
  * @param bufferLen - the length of the buffer

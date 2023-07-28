@@ -11,10 +11,6 @@
 
 struct IncomingData {
 
-//    IncomingData() {
-//            //init all fields
-//
-//    };
     float latitude = 0;
     bool isLatitudeInitialized = false;
 
@@ -83,41 +79,7 @@ public:
     mavlink_message_t currentMessage;
 
 
-
     BasicMavlinkEncoder();
-
-    /**
-     * Encode an attitude message into the buffer
-     * @param msg - the message object to pass by reference
-     * @param buffer - the buffer to encode the message into
-     * @param time_boot_ms - the time in milliseconds since boot
-     * @param roll - the roll angle
-     * @param pitch - the pitch angle
-     * @param yaw - the yaw angle
-     * @param rollspeed - the roll speed
-     * @param pitchspeed - the pitch speed
-     * @param yawspeed - the yaw speed
-     * @return The length of the buffer containing the encoded message.
-     */
-    std::size_t encodeAttitude(mavlink_message_t &msg, uint8_t *buffer, uint32_t time_boot_ms, float roll, float pitch, float yaw, float rollspeed, float pitchspeed, float yawspeed);
-
-
-    /**
-     * Encode a global position int message into the buffer
-     * @param msg - the message object to pass by reference
-     * @param buffer - the buffer to encode the message into
-     * @param time_boot_ms - the time in milliseconds since boot
-     * @param lat - the latitude
-     * @param lon - the longitude
-     * @param alt - the altitude
-     * @param relativeAlt - the relative altitude
-     * @param vx - the velocity in the x direction
-     * @param vy - the velocity in the y direction
-     * @param vz - the velocity in the z direction
-     * @param hdg - the heading
-     * @return The length of the buffer containing the encoded message.
-     */
-    size_t encodeGlobalPositionInt(mavlink_message_t &msg, uint8_t *buffer, uint32_t time_boot_ms, int32_t lat, int32_t lon, int32_t alt, int32_t relativeAlt, int16_t vx, int16_t vy, int16_t vz, uint16_t hdg);
 
 
     /**
@@ -127,27 +89,7 @@ public:
      */
     std::vector<uint8_t> findPackingFunction(IncomingData &data);
 
-    /**
-     * Combine two buffers into one
-     * @param buffer1 - the first buffer to combine
-     * @param buffer2 - the buffer to combine with buffer1
-     * @param len1 - the length of the first buffer
-     * @param len2 - the length of the second buffer
-     * @return The combined buffer.
-     */
-    static uint8_t *combineBuffers(uint8_t *buffer1, uint8_t *buffer2, size_t len1, size_t len2) {
 
-        //Allocate a new buffer to hold the combined buffers
-        auto *combinedBuffer = new uint8_t[len1 + len2];
-
-        //Copy the first buffer into the combined buffer
-        std::copy(buffer1, buffer1 + len1, combinedBuffer);
-        std::copy(buffer2, buffer2 + len2, combinedBuffer + len1);
-
-        //Return the combined buffer
-        return combinedBuffer;
-    }
 };
-
 
 #endif //WARGMAVLINKSUPPORT_BASICMAVLINKENCODER_H
